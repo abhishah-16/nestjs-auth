@@ -77,7 +77,7 @@ export class AuthService {
         if (!user) {
             throw new ForbiddenException('Access Denied')
         }
-        const passmatch = await bcrypt.compare(dto.password, user.hash)
+        const passmatch = await bcrypt.compare(dto.password.toString(), user.hash)
         if (!passmatch) {
             throw new ForbiddenException('Access Denied')
         }
@@ -86,8 +86,18 @@ export class AuthService {
         return tokens
     }
 
-    logout() {
-
+    async logout(userId: number) {
+        await this.prisma.user.updateMany({
+            where: {
+                id: userId,
+                hashedRt: {
+                    not: null
+                }
+            },
+            data: {
+                hashedRt: null
+            }
+        })
     }
 
     refreshToken() {
