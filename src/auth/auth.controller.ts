@@ -7,7 +7,6 @@ import { Tokens } from './types';
 export class AuthController {
 
     constructor(private authservice: AuthService) {
-
     }
 
     @Post('/local/signup')
