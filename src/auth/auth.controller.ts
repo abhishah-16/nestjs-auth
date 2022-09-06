@@ -33,7 +33,8 @@ export class AuthController {
     @UseGuards(AuthGuard('jwt-refresh'))
     @Post('refresh')
     @HttpCode(HttpStatus.OK)
-    refreshToken() {
-        return this.authservice.refreshToken()
+    refreshToken(@Req() req: Request) {
+        const user = req.user
+        return this.authservice.refreshToken(user['sub'],user['refreshToken'])
     }
 }
