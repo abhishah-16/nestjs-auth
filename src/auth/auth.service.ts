@@ -21,6 +21,7 @@ export class AuthService {
                 hash
             }
         })
+        return null
     }
 
     signin() {
