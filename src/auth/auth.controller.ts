@@ -6,12 +6,11 @@ import { Tokens } from './types';
 @Controller('auth')
 export class AuthController {
 
-    constructor(private authservice: AuthService) {
-    }
+    constructor(private authservice: AuthService) { }
 
     @Post('/local/signup')
     signup(@Body() dto: AuthDto): Promise<Tokens> {
-      return  this.authservice.signup(dto)
+        return this.authservice.signup(dto)
     }
 
     @Post('/local/signin')
