@@ -83,6 +83,7 @@ export class AuthService {
         }
         const tokens = await this.getToken(user.id, user.email)
         await this.updateRtHash(user.id, tokens.refresh_token)
+        console.log(tokens);
         return tokens
     }
 
